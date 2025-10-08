@@ -1,0 +1,14 @@
+{
+    "type":"minecraft:crafting_shaped",
+    "category":"misc",
+    "pattern":[
+        "$$$",
+        "$#$",
+        "$$$"
+    ],
+    "key":{
+        "#":{"item":"minecraft:arrow"},
+        "$":{"item":"minecraft:rabbit_foot"}
+    },
+    "result":{"item":"ma:speedarrow"}
+}
