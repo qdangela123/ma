@@ -5,24 +5,18 @@ import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.ArrowItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.Vec3;
-import net.zz.ma.entity.SpeedArrowE;
+import net.zz.ma.entity.BoltArrowE;
 
 
-public class SpeedArrow extends ArrowItem
+public class BoltArrow extends ArrowItem
 {
-    public SpeedArrow(Properties builder)
+    public BoltArrow(Properties builder)
     {
         super(builder);
     }
     @Override
     public AbstractArrow createArrow(Level world, ItemStack stack, LivingEntity shooter)
     {
-        SpeedArrowE a = new SpeedArrowE(world, shooter);
-        // a.setNoGravity(true);
-        Vec3 x = a.getDeltaMovement();
-        a.setDeltaMovement(x.multiply(2,2,2));
-        a.setBaseDamage(a.getBaseDamage() * 4);
-        return a;
+        return new BoltArrowE(world, shooter);
     }
 }

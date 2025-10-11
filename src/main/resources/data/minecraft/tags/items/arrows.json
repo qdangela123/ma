@@ -1,6 +1,7 @@
 {
     "replace":false,
     "values":[
-        "ma:speedarrow"
+        "ma:speedarrow",
+        "ma:boltarrow"
     ]
 }

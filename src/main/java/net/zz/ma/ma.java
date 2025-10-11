@@ -1,8 +1,5 @@
 package net.zz.ma;
 
-import net.minecraft.client.renderer.item.ItemProperties;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.BowItem;
 import net.minecraft.world.item.CreativeModeTabs;
 import com.mojang.logging.LogUtils;
 import net.minecraftforge.api.distmarker.Dist;
@@ -17,7 +14,7 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.zz.ma.entity.SpeedArrowR;
+import net.zz.ma.entity.ArrowR;
 import org.slf4j.Logger;
 @Mod(ma.MODID)
 public class ma
@@ -42,6 +39,7 @@ public class ma
         if(event.getTabKey() == CreativeModeTabs.COMBAT)
         {
             event.accept(items.SPEED_ARROW_ITEM);
+            event.accept(items.BOLT_ARROW_ITEM);
         }
     }
     @SubscribeEvent
@@ -54,23 +52,24 @@ public class ma
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event)
         {
-            ItemProperties.register(items.SPEED_ARROW_ITEM.get(), new ResourceLocation("pull"), (itemStack, clientWorld, livingEntity, seed) -> {
-                if (livingEntity == null) {
-                    return 0.0F;
-                }
-                return livingEntity.getUseItem().getItem() instanceof BowItem ? (livingEntity.getTicksUsingItem()) / 20.0F : 0.0F;
-            });
-            ItemProperties.register(items.SPEED_ARROW_ITEM.get(), new ResourceLocation("pulling"), (itemStack, clientWorld, livingEntity, seed) -> {
-                if (livingEntity == null) {
-                    return 0.0F;
-                }
-                return livingEntity.isUsingItem() && livingEntity.getUseItem().getItem() instanceof BowItem ? 1.0F : 0.0F;
-            });
+            // ItemProperties.register(items.SPEED_ARROW_ITEM.get(), new ResourceLocation("pull"), (itemStack, clientWorld, livingEntity, seed) -> {
+            //     if (livingEntity == null) {
+            //         return 0.0F;
+            //     }
+            //     return livingEntity.getUseItem().getItem() instanceof BowItem ? (livingEntity.getTicksUsingItem()) / 20.0F : 0.0F;
+            // });
+            // ItemProperties.register(items.SPEED_ARROW_ITEM.get(), new ResourceLocation("pulling"), (itemStack, clientWorld, livingEntity, seed) -> {
+            //     if (livingEntity == null) {
+            //         return 0.0F;
+            //     }
+            //     return livingEntity.isUsingItem() && livingEntity.getUseItem().getItem() instanceof BowItem ? 1.0F : 0.0F;
+            // });
         }
         @SubscribeEvent
         public static void entitySetup(EntityRenderersEvent.RegisterRenderers event)
         {
-            event.registerEntityRenderer(entities.SPEEDARROW.get(), SpeedArrowR::new);
+            event.registerEntityRenderer(entities.SPEEDARROW.get(), ArrowR::new);
+            event.registerEntityRenderer(entities.BOLTARROW.get(), ArrowR::new);
         }
     }
 }
