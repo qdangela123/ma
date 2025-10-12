@@ -2,6 +2,7 @@
     "replace":false,
     "values":[
         "ma:speedarrow",
-        "ma:boltarrow"
+        "ma:boltarrow",
+        "ma:explodearrow"
     ]
 }

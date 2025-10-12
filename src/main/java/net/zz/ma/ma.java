@@ -1,6 +1,11 @@
 package net.zz.ma;
 
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.item.ArrowItem;
 import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.DispenserBlock;
+
 import com.mojang.logging.LogUtils;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
@@ -14,7 +19,10 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.registries.RegistryObject;
 import net.zz.ma.entity.ArrowR;
+
+
 import org.slf4j.Logger;
 @Mod(ma.MODID)
 public class ma
@@ -33,13 +41,21 @@ public class ma
     }
     private void commonSetup(final FMLCommonSetupEvent event)
     {
+        DispenserBlock.registerBehavior(items.SPEED_ARROW_ITEM.get(),new items.UniversalDispenseItemBehavior(entities.SPEEDARROW));
+        DispenserBlock.registerBehavior(items.BOLT_ARROW_ITEM.get(),new items.UniversalDispenseItemBehavior(entities.BOLTARROW));
+        DispenserBlock.registerBehavior(items.EXPLODE_ARROW_ITEM.get(),new items.UniversalDispenseItemBehavior(entities.EXPLODEARROW));
     }
     private void addCreative(BuildCreativeModeTabContentsEvent event)
     {
         if(event.getTabKey() == CreativeModeTabs.COMBAT)
         {
-            event.accept(items.SPEED_ARROW_ITEM);
-            event.accept(items.BOLT_ARROW_ITEM);
+            for(RegistryObject<Item> item:items.ITEMS.getEntries())
+            {
+                if(item.get() instanceof ArrowItem)
+                {
+                    event.accept(item);
+                }
+            }
         }
     }
     @SubscribeEvent
@@ -52,24 +68,13 @@ public class ma
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event)
         {
-            // ItemProperties.register(items.SPEED_ARROW_ITEM.get(), new ResourceLocation("pull"), (itemStack, clientWorld, livingEntity, seed) -> {
-            //     if (livingEntity == null) {
-            //         return 0.0F;
-            //     }
-            //     return livingEntity.getUseItem().getItem() instanceof BowItem ? (livingEntity.getTicksUsingItem()) / 20.0F : 0.0F;
-            // });
-            // ItemProperties.register(items.SPEED_ARROW_ITEM.get(), new ResourceLocation("pulling"), (itemStack, clientWorld, livingEntity, seed) -> {
-            //     if (livingEntity == null) {
-            //         return 0.0F;
-            //     }
-            //     return livingEntity.isUsingItem() && livingEntity.getUseItem().getItem() instanceof BowItem ? 1.0F : 0.0F;
-            // });
         }
         @SubscribeEvent
         public static void entitySetup(EntityRenderersEvent.RegisterRenderers event)
         {
             event.registerEntityRenderer(entities.SPEEDARROW.get(), ArrowR::new);
             event.registerEntityRenderer(entities.BOLTARROW.get(), ArrowR::new);
+            event.registerEntityRenderer(entities.EXPLODEARROW.get(), ArrowR::new);
         }
     }
 }
