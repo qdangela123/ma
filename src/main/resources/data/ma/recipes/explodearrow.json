@@ -2,13 +2,13 @@
     "type":"minecraft:crafting_shaped",
     "category":"misc",
     "pattern":[
-        "$$$",
-        "$#$",
-        "$$$"
+        "  $",
+        " # ",
+        "   "
     ],
     "key":{
         "#":{"item":"minecraft:arrow"},
-        "$":{"item":"minecraft:tnt"}
+        "$":{"item":"ma:supertnt"}
     },
     "result":{"item":"ma:explodearrow"}
 }

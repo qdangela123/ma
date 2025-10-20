@@ -1,6 +1,6 @@
 package net.zz.ma;
 
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.client.renderer.entity.TntRenderer;
 import net.minecraft.world.item.ArrowItem;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
@@ -33,6 +33,7 @@ public class ma
     {
         IEventBus modEventBus = context.getModEventBus();
         modEventBus.addListener(this::commonSetup);
+        blocks.BLOCKS.register(modEventBus);
         items.ITEMS.register(modEventBus);
         entities.ENTITIES.register(modEventBus);
         MinecraftForge.EVENT_BUS.register(this);
@@ -75,6 +76,7 @@ public class ma
             event.registerEntityRenderer(entities.SPEEDARROW.get(), ArrowR::new);
             event.registerEntityRenderer(entities.BOLTARROW.get(), ArrowR::new);
             event.registerEntityRenderer(entities.EXPLODEARROW.get(), ArrowR::new);
+            event.registerEntityRenderer(entities.SUPERTNTE.get(), TntRenderer::new);
         }
     }
 }
