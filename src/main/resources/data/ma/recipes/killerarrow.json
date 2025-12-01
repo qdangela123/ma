@@ -1,0 +1,15 @@
+{
+    "type":"minecraft:crafting_shaped",
+    "category":"misc",
+    "pattern":[
+        "$$$",
+        "*#*",
+        "$$$"
+    ],
+    "key":{
+        "#":{"item":"minecraft:arrow"},
+        "$":{"item":"minecraft:nether_star"},
+        "*":{"item":"minecraft:end_crystal"}
+    },
+    "result":{"item":"ma:killerarrow","count":3}
+}

@@ -15,6 +15,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.zz.ma.item.BoltArrow;
 import net.zz.ma.item.ExplodeArrow;
+import net.zz.ma.item.KillerArrow;
 import net.zz.ma.item.SpeedArrow;
 // import net.minecraft.world.item.ArrowItem;
 
@@ -24,6 +25,7 @@ public class items
     public static final RegistryObject<Item> SPEED_ARROW_ITEM = ITEMS.register("speedarrow",() -> new SpeedArrow(new Item.Properties()));
     public static final RegistryObject<Item> BOLT_ARROW_ITEM = ITEMS.register("boltarrow",() -> new BoltArrow(new Item.Properties()));
     public static final RegistryObject<Item> EXPLODE_ARROW_ITEM = ITEMS.register("explodearrow",() -> new ExplodeArrow(new Item.Properties()));
+    public static final RegistryObject<Item> KILLER_ARROW_ITEM = ITEMS.register("killerarrow",() -> new KillerArrow(new Item.Properties()));
     public static class UniversalDispenseItemBehavior extends AbstractProjectileDispenseBehavior
     {
         private final Supplier<? extends EntityType<? extends AbstractArrow>> arrowEntityType;

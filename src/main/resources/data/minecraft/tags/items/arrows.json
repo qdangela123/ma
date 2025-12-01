@@ -3,6 +3,7 @@
     "values":[
         "ma:speedarrow",
         "ma:boltarrow",
-        "ma:explodearrow"
+        "ma:explodearrow",
+        "ma:killerarrow"
     ]
 }
