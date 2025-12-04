@@ -13,11 +13,13 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+import net.zz.ma.item.Blood;
 import net.zz.ma.item.BoltArrow;
 import net.zz.ma.item.ExplodeArrow;
 import net.zz.ma.item.KillerArrow;
 import net.zz.ma.item.SpeedArrow;
 // import net.minecraft.world.item.ArrowItem;
+import net.zz.ma.item.VampireArrow;
 
 public class items
 {
@@ -26,6 +28,8 @@ public class items
     public static final RegistryObject<Item> BOLT_ARROW_ITEM = ITEMS.register("boltarrow",() -> new BoltArrow(new Item.Properties()));
     public static final RegistryObject<Item> EXPLODE_ARROW_ITEM = ITEMS.register("explodearrow",() -> new ExplodeArrow(new Item.Properties()));
     public static final RegistryObject<Item> KILLER_ARROW_ITEM = ITEMS.register("killerarrow",() -> new KillerArrow(new Item.Properties()));
+    public static final RegistryObject<Item> BLOOD_ITEM = ITEMS.register("blood",() -> new Blood(new Item.Properties()));
+    public static final RegistryObject<Item> VAMPIRE_ARROW_ITEM = ITEMS.register("vampirearrow",() -> new VampireArrow(new Item.Properties()));
     public static class UniversalDispenseItemBehavior extends AbstractProjectileDispenseBehavior
     {
         private final Supplier<? extends EntityType<? extends AbstractArrow>> arrowEntityType;

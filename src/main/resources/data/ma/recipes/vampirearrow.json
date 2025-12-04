@@ -1,0 +1,14 @@
+{
+    "type":"minecraft:crafting_shaped",
+    "category":"misc",
+    "pattern":[
+        "  $",
+        " # ",
+        "   "
+    ],
+    "key":{
+        "#":{"item":"minecraft:arrow"},
+        "$":{"item":"ma:blood"}
+    },
+    "result":{"item":"ma:vampirearrow"}
+}

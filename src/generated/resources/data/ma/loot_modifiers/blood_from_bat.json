@@ -1,0 +1,10 @@
+{
+  "type": "ma:additem",
+  "conditions": [
+    {
+      "condition": "forge:loot_table_id",
+      "loot_table_id": "minecraft:entities/bat"
+    }
+  ],
+  "item": "ma:blood"
+}

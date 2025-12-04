@@ -1,23 +1,16 @@
 package net.zz.ma;
 
 import net.minecraft.client.renderer.entity.TntRenderer;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.Entity.RemovalReason;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ArrowItem;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.DispenserBlock;
-import net.minecraft.world.phys.EntityHitResult;
-import net.minecraft.world.phys.HitResult;
 
 import com.mojang.logging.LogUtils;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
-import net.minecraftforge.event.entity.ProjectileImpactEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -28,9 +21,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.RegistryObject;
 import net.zz.ma.entity.ArrowR;
-import net.zz.ma.entity.KillerArrowE;
 
-import org.antlr.v4.parse.ANTLRParser.elementOptions_return;
 import org.slf4j.Logger;
 @Mod(ma.MODID)
 public class ma
@@ -44,6 +35,7 @@ public class ma
         blocks.BLOCKS.register(modEventBus);
         items.ITEMS.register(modEventBus);
         entities.ENTITIES.register(modEventBus);
+        loots.LOOT_MODIFIER.register(modEventBus);
         MinecraftForge.EVENT_BUS.register(this);
         modEventBus.addListener(this::addCreative);
         context.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
@@ -67,6 +59,10 @@ public class ma
                 }
             }
         }
+        if(event.getTabKey() == CreativeModeTabs.INGREDIENTS)
+        {
+            event.accept(items.BLOOD_ITEM);
+        }
     }
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event)
@@ -87,35 +83,6 @@ public class ma
             event.registerEntityRenderer(entities.EXPLODEARROW.get(),ArrowR::new);
             event.registerEntityRenderer(entities.KILLERARROW.get(),ArrowR::new);
             event.registerEntityRenderer(entities.SUPERTNTE.get(),TntRenderer::new);
-        }
-    }
-    @Mod.EventBusSubscriber(modid=MODID)
-    public static class KillerArrowHandler
-    {
-        @SubscribeEvent
-        public static void onArrowHit(ProjectileImpactEvent event)
-        {
-            if(!(event.getProjectile() instanceof KillerArrowE arrow)||event.getRayTraceResult().getType()!=HitResult.Type.ENTITY)
-            {
-                return;
-            }
-            Entity hitEntity = ((EntityHitResult) event.getRayTraceResult()).getEntity();
-            if(!(hitEntity instanceof LivingEntity livingTarget))
-            {
-                return;
-            }
-            float currentHealth = livingTarget.getHealth();
-            float damage=500;
-            if(currentHealth<=300)
-            {
-                damage=currentHealth;
-            }
-            else if(currentHealth<=1100)
-            {
-                damage=(currentHealth-300)/4+300;
-            }
-            arrow.level().explode(arrow,hitEntity.getX(),hitEntity.getY(),hitEntity.getZ(),damage,false,Level.ExplosionInteraction.BLOCK);
-            arrow.remove(RemovalReason.DISCARDED);
         }
     }
 }

@@ -9,7 +9,8 @@ import net.minecraft.world.phys.Vec3;
 
 public class ExplodeArrowE extends Arrow
 {
-    public ExplodeArrowE(EntityType<? extends Arrow> entityType, Level world) {
+    public ExplodeArrowE(EntityType<? extends Arrow> entityType, Level world)
+    {
         super(entityType,world);
     }
     public ExplodeArrowE(Level level,LivingEntity owner)

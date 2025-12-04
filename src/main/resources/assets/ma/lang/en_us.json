@@ -3,5 +3,7 @@
     "item.ma.boltarrow":"Bolt Arrow",
     "item.ma.explodearrow":"Explode Arrow",
     "item.ma.killerarrow":"Killer Arrow",
+    "item.ma.blood":"Blood",
+    "item.ma.vampirearrow":"Vampire Arrow",
     "block.ma.supertnt":"Super TNT Block"
 }
